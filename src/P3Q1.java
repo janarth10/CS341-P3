@@ -41,18 +41,25 @@ public class P3Q1 {
                 distances[source] = 0;
 
                 int u, v = 0;
+                boolean valueChange = false;
                 for(int i = 0; i < n; i++){
+                    valueChange = false;
                     for(Edge e: H){
                         u = e.start;
                         v = e.end;
                         if(v != source) {
                             distances[v] = Math.min(distances[v],
                                     Math.max(distances[u], distances[u] + e.weight));
+                            valueChange = true;
                         }
                         if(u != source){
                             distances[u] = Math.min(distances[u],
                                     Math.max(distances[v], distances[v] + e.weight));
+                            valueChange = true;
                         }
+                    }
+                    if(valueChange == false){
+                        break;
                     }
                 }
 
